@@ -14,7 +14,8 @@ class Janela(ctk.CTk):
     def __init__(self):
         super().__init__()#todas as funcionalidades devem ser chamadas apartir da superclass
         self.layout()
-
+        self.frame_master()
+        
     #configuração do layout
     def layout(self):
         self.title('Gesntão de Clientes')
@@ -27,7 +28,8 @@ class Janela(ctk.CTk):
 
     #frame onde vai rodar o sistema vais receber todos os entrys e labels e botões 
     def frame_master(self):
-        pass
+        frame_titulo = ctk.CTkFrame(self, width=940 , height=50, corner_radius=10,border_width=2 ,border_color= 'yellow', bg_color='teal',fg_color="teal").place(x=60, y=60)
+        label_titulo = ctk.CTkLabel(self, text="GESTÃO DE PESSOAS", font=('ariel',30), text_color='#fff',fg_color='transparent').place(x=350, y=70)
 
         #função para pegar os valores
         def pegar_valores(self):
