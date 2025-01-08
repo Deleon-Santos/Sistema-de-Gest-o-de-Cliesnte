@@ -19,7 +19,7 @@ class Janela(ctk.CTk):
     #configuração do layout
     def layout(self):
         self.title('Gesntão de Clientes')
-        self.geometry('1080x740')
+        self.geometry('840x740')
         
 
     #configuração dos modos de aparencia
@@ -28,9 +28,14 @@ class Janela(ctk.CTk):
 
     #frame onde vai rodar o sistema vais receber todos os entrys e labels e botões 
     def frame_master(self):
-        frame_titulo = ctk.CTkFrame(self, width=940 , height=50, corner_radius=10,border_width=2 ,border_color= 'yellow', bg_color='teal',fg_color="teal").place(x=60, y=60)
-        label_titulo = ctk.CTkLabel(self, text="GESTÃO DE PESSOAS", font=('ariel',30), text_color='#fff',fg_color='transparent').place(x=350, y=70)
-
+        frame_titulo = ctk.CTkFrame(self, width=650 , height=50, corner_radius=10,border_width=2 ,border_color= 'yellow', bg_color='teal',fg_color="teal").place(x=90, y=60)
+        label_titulo = ctk.CTkLabel(self, text="GESTÃO DE PESSOAS", font=('ariel',30), text_color='#fff',fg_color='transparent').place(x=250, y=70)
+        label_nome = ctk.CTkLabel(self,text='Nome Completo', text_color='#fff',font=('ariel',15)).place(x=90, y=150)
+        entry_nome = ctk.CTkEntry(self, font=('ariel',20),width=450).place(x=90,y=180)
+        label_tel = ctk.CTkLabel(self,text='Tel/Celular', text_color='#fff',font=('ariel',15)).place(x=590, y=150)
+        entry_tel = ctk.CTkEntry(self, font=('ariel',20),width=150).place(x=590,y=180)
+        
+        
         #função para pegar os valores
         def pegar_valores(self):
             pass
