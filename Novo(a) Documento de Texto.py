@@ -20,7 +20,7 @@ class Janela(ctk.CTk):
     #configuração do layout
     def layout(self):
         self.title('Gestão de Clientes')
-        self.geometry('840x740')
+        self.geometry('840x640')
         
 
     #configuração dos modos de aparencia
@@ -45,10 +45,10 @@ class Janela(ctk.CTk):
         entry_genero = ctk.CTkComboBox(self,values=['Masculino','Feminino'], width=120, text_color='#fff',font=('ariel',15)).place(x=620, y=250)
         
         label_rua = ctk.CTkLabel(self,text='Rua', text_color='#fff',font=('ariel',15)).place(x=90, y=290)
-        label_numero = ctk.CTkLabel(self,text='N°', text_color='#fff',font=('ariel',15)).place(x=620, y=290)
+        label_numero = ctk.CTkLabel(self,text='N°', text_color='#fff',font=('ariel',15)).place(x=610, y=290)
         label_complemento = ctk.CTkLabel(self,text='Compl', text_color='#fff',font=('ariel',15)).place(x=690, y=290)
         entry_rua = ctk.CTkEntry(self, font=('ariel',20),width=500).place(x=90,y=320)
-        entry_numero = ctk.CTkEntry(self, font=('ariel',20),width=50).place(x=620,y=320)
+        entry_numero = ctk.CTkEntry(self, font=('ariel',20),width=60).place(x=610,y=320)
         entry_complemento = ctk.CTkEntry(self, font=('ariel',20),width=50).place(x=690,y=320)
         label_cep = ctk.CTkLabel(self,text='CEP', text_color='#fff',font=('ariel',15)).place(x=90, y=360)
         label_bairro = ctk.CTkLabel(self,text='Bairro', text_color='#fff',font=('ariel',15)).place(x=250, y=360)
