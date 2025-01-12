@@ -38,6 +38,8 @@ class Janela(ctk.CTk):
             email=email_value.get()
             genero=genero_value.get()
             rua=rua_value.get()
+            numero=numero_value.get()
+            complemento=complemento_value.get()
             bairro=bairro_value.get()
             cidade=cidade_value.get()
             uf=uf_value.get()
@@ -45,9 +47,10 @@ class Janela(ctk.CTk):
             
             
 
-            def mostrar_info(nome,tel,idade,email,genero,rua,bairro,cidade,uf):
-                print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
-            mostrar_info(nome,idade,tel,email,genero,rua,bairro,cidade,uf)
+            def mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf):
+                
+                print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}\nnumero :{numero}\ncomplemento :{complemento}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
+            mostrar_info(nome,idade,tel,email,genero,rua,numero,complemento,bairro,cidade,uf)
         #função para limpa os resultados
         def limpar():
             nome_value.set('')
@@ -56,27 +59,27 @@ class Janela(ctk.CTk):
             email_value.set('')
             genero_value.set('')
             rua_value.set('')
+            numero_value.set('')
+            complemento_value.set('')
             bairro_value.set('')
             cidade_value.set('')
             uf_value.set('')
             #obs_value.set(0.0,END)
 
-
-        nome_value = StringVar(value='Deleon P Santos')
+        nome_value = StringVar(value='joão P Santos')
         tel_value = StringVar(value='11912345678')
         idade_value = StringVar(value='25')
         email_value = StringVar(value='dsdh@gmm.com.br')
-        genero_value = StringVar(value='masculino')
-        rua_value = StringVar(value='mario veloso serqueira')
-        bairro_value = StringVar(value='carlos drummord andrade')
-        cidade_value = StringVar()
-        cep_value = StringVar()
-        complemento_value = StringVar()
-        numero_value = StringVar()
-        uf_value = StringVar()
+        genero_value = StringVar(value='Masculino')
+        rua_value = StringVar(value='Mario Veloso Serqueira')
+        bairro_value = StringVar(value='Carlos Drummord Andrade')
+        cidade_value = StringVar(value='Caracas')
+        cep_value = StringVar(value='06666000')
+        complemento_value = StringVar(value='b')
+        numero_value = StringVar(value='43')
+        uf_value = StringVar(value='RN')
         #obs_value = StringVar()
         
-
         frame_titulo = ctk.CTkFrame(self, width=650 , height=50, corner_radius=10,border_width=2 ,border_color= 'teal', bg_color='teal',fg_color="teal").place(x=90, y=60)
         label_titulo = ctk.CTkLabel(self, text="GESTÃO DE PESSOAS", font=('ariel',30), text_color=['#000','#fff'],bg_color='transparent',fg_color='transparent').place(x=250, y=70)
         label_nome = ctk.CTkLabel(self,text='Nome Completo', text_color=['#000','#fff'],font=('ariel',15)).place(x=90, y=150)
@@ -89,7 +92,6 @@ class Janela(ctk.CTk):
         entry_idade = ctk.CTkEntry(self,textvariable=idade_value, font=('ariel',20),width=50).place(x=550,y=250)
         label_genero = ctk.CTkLabel(self,text='Genero', text_color=['#000','#fff'],font=('ariel',15)).place(x=620, y=220)
         entry_genero = ctk.CTkComboBox(self,values=['Masculino','Feminino'], width=120, text_color=['#000','#fff'],font=('ariel',15)).place(x=620, y=250)
-        
         label_rua = ctk.CTkLabel(self,text='Rua', text_color=['#000','#fff'],font=('ariel',15)).place(x=90, y=290)
         label_numero = ctk.CTkLabel(self,text='N°', text_color=['#000','#fff'],font=('ariel',15)).place(x=610, y=290)
         label_complemento = ctk.CTkLabel(self,text='Compl', text_color=['#000','#fff'],font=('ariel',15)).place(x=690, y=290)
