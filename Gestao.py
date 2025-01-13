@@ -6,6 +6,7 @@ import customtkinter as ctk
 from tkinter import * 
 from tkinter import messagebox
 import Gestao_XLSX as gerar
+import bd_gestao as bd
 
 pessoas=[]
 # class que define a aparencia
@@ -54,8 +55,13 @@ class Janela(ctk.CTk):
                 
                 pessoa=[nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf]
                 pessoas.append(pessoa.copy())
+                
                 gerar.gravar_xlsx([pessoas],"Tabela de Pessoas.xlsx")
                 messagebox.showinfo(title='documento salvo',message='Documento salvo com sucesso')
+
+                salvo = bd.verificar_tabela(pessoa)
+                if salvo:
+                    print('salvo com sucesso')
 
                 #print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}\nnumero :{numero}\ncomplemento :{complemento}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
             mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf)

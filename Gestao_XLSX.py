@@ -20,10 +20,6 @@ def gravar_xlsx(pessoas, nome_arquivo="Tabela de Pessoas.xlsx", formatar=True):
     except (IOError, ValueError) as e:
         print(f"Erro ao salvar a planilha: {e}")
 
-# Exemplo de uso
-dados = [
-    ['João', '123456789', 30, 'joao@email.com', 'Masculino', ...],
-    # ... outros registros
-]
+
 
 

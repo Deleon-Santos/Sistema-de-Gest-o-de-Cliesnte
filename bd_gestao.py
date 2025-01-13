@@ -8,14 +8,14 @@ def conexao_bd():
     except:
         print('erro em conexao')
 
-def criar_tabela_gestao():
+def criar_tabela_gestao(conexao, cursor):
     try:
-        conexao, cursor = conexao_bd()
-        cursor.execute( """create table if not exists pessoa:
+        
+        cursor.execute( """create table if not exists pessoa
                         nome text,
                     tel text,
                     idade integer,
-                    email taxt,
+                    email text,
                     genero text,
                     rua text,
                     numero integer,
@@ -24,26 +24,33 @@ def criar_tabela_gestao():
                     cidade text,
                     uf text""")
         print('tablela foi criada com sucesso')
+        conexao.commit()
+        
+        return True
+    except Exception as e:
+        print(f'Erro de conexao {e}')
 
-        verificar_tabela()
-    except:
-        print('Erro de conexao')
+def salvar_dados(pessoa, conexao, cursor):
+    cursor.execute("""insert into pessoa (nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf)
+                   values(?,?,?,?,?,?,?,?,?,?,?)"""
+                   ,pessoa[0],pessoa[1],pessoa[2],pessoa[3],pessoa[4],pessoa[5],pessoa[6],pessoa[7],pessoa[8],pessoa[9],pessoa[10])
+    conexao.commit()
+    
+    if conexao:
+        conexao.close()
+        cursor.close()
 
-def verificar_tabela():
+def verificar_tabela(pessoa):
     try:
         conexao, cursor = conexao_bd()
-        cursor.execute("""SELECT count(*) from pessoa""")
-        resultado = cursor.fetchone()
-
-        if resultado:
-            print(f"A tabela existe.")
+        tabela=criar_tabela_gestao(conexao, cursor)
+        if tabela:
+        
+            salvar_dados(pessoa, conexao, cursor)
             return True
     except :
-        criar_tabela_gestao()
-        print('tablela foi criada com sucesso')
-    """finally:
-        if conexao:
-            conexao.close()
-            cursor.close()
-"""
+        print('tablela nao existia')
+        
+         
+    
     
