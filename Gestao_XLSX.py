@@ -1,16 +1,29 @@
-from pandas import DataFrame as df
-def gerar_xlsx(pessoa):
-    titulos=['Nome','Tel','Idade','Email','Genero','Rua','Numero','Complemento','Bairro','Cidade','UF']
+
+import pandas as pd
+
+def gravar_xlsx(pessoas, nome_arquivo="Tabela de Pessoas.xlsx", formatar=True):
+    titulos = ['Nome', 'Tel', 'Idade', 'Email', 'Genero', 'Rua', 'Numero', 'Complemento', 'Bairro', 'Cidade', 'UF']
     try:
-        planilha == "PLANILHA GESTÂO DE PESSOAS": #definição da tabela em excel
-        tabela = df(pessoa[0:], columns=titulos)
-        documento = sg.popup_get_file("novo_item", save_as=True, default_extension=".xlsx")
-        
-        if documento:
-            with pd.ExcelWriter(documento, engine='openpyxl') as escreve:
-                tabela.to_excel(escreve, index=False)        
-        sg.popup("Planilha salva")
-    Exception as e:
-        print(f'Erro{e}')
-        
+        for pessoa in pessoas:
+            tabela = pd.DataFrame(pessoa, columns=titulos)
+
+            with pd.ExcelWriter(nome_arquivo, engine='openpyxl') as writer:
+                tabela.to_excel(writer, index=False, sheet_name='Pessoas')
+
+                # Formatação condicional (opcional)
+                if formatar:
+                    worksheet = writer.sheets['Pessoas']
+                    worksheet.column_dimensions['C'].number_format = '0'  # Formatar coluna "Idade" como número inteiro
+                    # ... outras formatações
+
+        print("Planilha salva com sucesso!")
+    except (IOError, ValueError) as e:
+        print(f"Erro ao salvar a planilha: {e}")
+
+# Exemplo de uso
+dados = [
+    ['João', '123456789', 30, 'joao@email.com', 'Masculino', ...],
+    # ... outros registros
+]
+
 

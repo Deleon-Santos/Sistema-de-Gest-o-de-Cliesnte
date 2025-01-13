@@ -3,8 +3,11 @@
 """Sistema de Gestão de Pessoas com Python e POO"""
 #importação de bibliotecas
 import customtkinter as ctk
-from tkinter import *
+from tkinter import * 
+from tkinter import messagebox
+import Gestao_XLSX as gerar
 
+pessoas=[]
 # class que define a aparencia
 ctk.set_appearance_mode('System')
 ctk.set_default_color_theme('blue')
@@ -49,8 +52,13 @@ class Janela(ctk.CTk):
 
             def mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf):
                 
-                print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}\nnumero :{numero}\ncomplemento :{complemento}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
-            mostrar_info(nome,idade,tel,email,genero,rua,numero,complemento,bairro,cidade,uf)
+                pessoa=[nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf]
+                pessoas.append(pessoa.copy())
+                gerar.gravar_xlsx([pessoas],"Tabela de Pessoas.xlsx")
+                messagebox.showinfo(title='documento salvo',message='Documento salvo com sucesso')
+
+                #print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}\nnumero :{numero}\ncomplemento :{complemento}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
+            mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf)
         #função para limpa os resultados
         def limpar():
             nome_value.set('')
@@ -124,5 +132,6 @@ class Janela(ctk.CTk):
 if __name__=='__main__':
     app=Janela()#app recebe a janela
     app.mainloop()#app inicia o loop
+
 
 
