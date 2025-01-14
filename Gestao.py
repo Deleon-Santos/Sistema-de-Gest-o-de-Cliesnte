@@ -1,14 +1,14 @@
 
 
 """Sistema de Gestão de Pessoas com Python e POO"""
+
 #importação de bibliotecas
 import customtkinter as ctk
 from tkinter import * 
 from tkinter import messagebox
-import Gestao_XLSX as gerar
 import bd_gestao as bd
 
-pessoas=[]
+
 # class que define a aparencia
 ctk.set_appearance_mode('System')
 ctk.set_default_color_theme('blue')
@@ -41,30 +41,23 @@ class Janela(ctk.CTk):
             idade=idade_value.get()
             email=email_value.get()
             genero=genero_value.get()
+            cep=cep_value.get()
             rua=rua_value.get()
             numero=numero_value.get()
             complemento=complemento_value.get()
             bairro=bairro_value.get()
             cidade=cidade_value.get()
             uf=uf_value.get()
-            #obs=obs_value.get(0.0,END)
             
-            
+            #metodos para gravar e mostras as informações
+            def mostrar_info(pessoa):
+                resposta=bd.criar_tabela_gestao(pessoa)
+                
+                messagebox.showinfo(title='documento salvo',message=f'{resposta}')
 
-            def mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf):
-                
-                pessoa=[nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf]
-                
-                pessoas = bd.criar_tabela_gestao(pessoa)
-                gerar.gravar_xlsx([pessoas],"Tabela de Pessoas.xlsx")
-                messagebox.showinfo(title='documento salvo',message='Documento salvo com sucesso')
+            mostrar_info(pessoa=[nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf])
 
-                
-                
-                
 
-                #print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}\nnumero :{numero}\ncomplemento :{complemento}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
-            mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf)
         #função para limpa os resultados
         def limpar():
             nome_value.set('')
@@ -72,14 +65,15 @@ class Janela(ctk.CTk):
             idade_value.set('')
             email_value.set('')
             genero_value.set('')
+            cep_value.set('')
             rua_value.set('')
             numero_value.set('')
             complemento_value.set('')
             bairro_value.set('')
             cidade_value.set('')
             uf_value.set('')
-            #obs_value.set(0.0,END)
-
+            
+        #capturando os valos dentro das entrys
         nome_value = StringVar(value='joão P Santos')
         tel_value = StringVar(value='11912345678')
         idade_value = StringVar(value='25')
@@ -118,8 +112,8 @@ class Janela(ctk.CTk):
         label_uf = ctk.CTkLabel(self,text='UF', text_color=['#000','#fff'],font=('ariel',15)).place(x=700, y=360) 
         entry_cep = ctk.CTkEntry(self, textvariable=cep_value,font=('ariel',20),width=140).place(x=90,y=390)
         entry_bairro = ctk.CTkEntry(self,textvariable=bairro_value, font=('ariel',20),width=230).place(x=250,y=390)
-        entry_cidade = ctk.CTkEntry(self,  textvariable=nome_value,font=('ariel',20),width=180).place(x=500,y=390)
-        entry_uf = ctk.CTkEntry(self,  textvariable=cidade_value,font=('ariel',20),width=40).place(x=700,y=390)
+        entry_cidade = ctk.CTkEntry(self,  textvariable=cidade_value,font=('ariel',20),width=180).place(x=500,y=390)
+        entry_uf = ctk.CTkEntry(self,  textvariable=uf_value,font=('ariel',20),width=40).place(x=700,y=390)
         label_obs = ctk.CTkLabel(self,text='Observação', text_color=['#000','#fff'],font=('ariel',15)).place(x=90, y=430)
         entry_obs = ctk.CTkTextbox(self,  font=('ariel',20),width=650, height=60, fg_color='transparent',border_color='#aaa',border_width=1).place(x=90,y=460)
         
@@ -131,9 +125,6 @@ class Janela(ctk.CTk):
     def cambiar(self,nova_aparencia):
         ctk.set_appearance_mode(nova_aparencia)
     
-
-
-
 
 if __name__=='__main__':
     app=Janela()#app recebe a janela
