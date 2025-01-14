@@ -2,7 +2,7 @@
 import pandas as pd
 
 def gravar_xlsx(pessoas, nome_arquivo="Tabela de Pessoas.xlsx", formatar=True):
-    titulos = ['Nome', 'Tel', 'Idade', 'Email', 'Genero', 'Rua', 'Numero', 'Complemento', 'Bairro', 'Cidade', 'UF']
+    titulos = ['Id','Nome', 'Tel', 'Idade', 'Email', 'Genero', 'Rua', 'Numero', 'Complemento', 'Bairro', 'Cidade', 'UF']
     try:
         for pessoa in pessoas:
             tabela = pd.DataFrame(pessoa, columns=titulos)

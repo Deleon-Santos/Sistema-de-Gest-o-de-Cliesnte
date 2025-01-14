@@ -54,14 +54,14 @@ class Janela(ctk.CTk):
             def mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf):
                 
                 pessoa=[nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf]
-                pessoas.append(pessoa.copy())
                 
+                pessoas = bd.criar_tabela_gestao(pessoa)
                 gerar.gravar_xlsx([pessoas],"Tabela de Pessoas.xlsx")
                 messagebox.showinfo(title='documento salvo',message='Documento salvo com sucesso')
 
-                salvo = bd.verificar_tabela(pessoa)
-                if salvo:
-                    print('salvo com sucesso')
+                
+                
+                
 
                 #print(f'nome :{nome}\nidade :{idade}\ntelefone :{tel}\nemail :{email}\ngenro :{genero}\nrua :{rua}\nnumero :{numero}\ncomplemento :{complemento}nbairro :{bairro}\ncidade :{cidade}\nuf :{uf}')
             mostrar_info(nome,tel,idade,email,genero,rua,numero,complemento,bairro,cidade,uf)
