@@ -13,6 +13,7 @@ import bd_gestao as bd
 ctk.set_appearance_mode('System')
 ctk.set_default_color_theme('blue')
 
+
 # Super class APK
 class Janela(ctk.CTk):
     def __init__(self):
@@ -20,7 +21,8 @@ class Janela(ctk.CTk):
         self.layout()
         self.frame_master()
         self.aparencia()
-        
+
+
     #configuração do layout
     def layout(self):
         self.title('Gestão de Clientes')
@@ -49,12 +51,11 @@ class Janela(ctk.CTk):
             cidade=cidade_value.get()
             uf=uf_value.get()
             
+
             #metodos para gravar e mostras as informações
             def mostrar_info(pessoa):
                 resposta=bd.criar_tabela_gestao(pessoa)
-                
                 messagebox.showinfo(title='documento salvo',message=f'{resposta}')
-
             mostrar_info(pessoa=[nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf])
 
 
@@ -116,11 +117,11 @@ class Janela(ctk.CTk):
         entry_uf = ctk.CTkEntry(self,  textvariable=uf_value,font=('ariel',20),width=40).place(x=700,y=390)
         label_obs = ctk.CTkLabel(self,text='Observação', text_color=['#000','#fff'],font=('ariel',15)).place(x=90, y=430)
         entry_obs = ctk.CTkTextbox(self,  font=('ariel',20),width=650, height=60, fg_color='transparent',border_color='#aaa',border_width=1).place(x=90,y=460)
-        
         btn_salvar = ctk.CTkButton(self,text='Salvar'.upper(),command=salvar,text_color=['#000','#fff'],font=('ariel',15),hover_color='teal').place(x=350,y=560)
         btn_salvar = ctk.CTkButton(self,text='Limpar'.upper(),command=limpar,text_color=['#000','#fff'],font=('ariel',15),hover_color='teal').place(x=600,y=560)
         #função para pegar os valores
       
+
     #função para alterna a aparencia do sistema
     def cambiar(self,nova_aparencia):
         ctk.set_appearance_mode(nova_aparencia)
