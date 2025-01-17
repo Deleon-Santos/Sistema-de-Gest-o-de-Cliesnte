@@ -7,6 +7,7 @@ import customtkinter as ctk
 from tkinter import * 
 from tkinter import messagebox
 import bd_gestao as bd
+import validar_entradas as validar
 
 
 # class que define a aparencia
@@ -38,37 +39,61 @@ class Janela(ctk.CTk):
     #frame onde vai rodar o sistema vais receber todos os entrys e labels e botões 
     def frame_master(self):
         def salvar():
-        
-                
-            nome=nome_value.get()
+            campos_nulos=[]   
+
+            nome = nome_value.get() 
+            confirmar_nome=validar.validar_nome(nome)
+            if confirmar_nome != True:
+                campos_nulos.append('Nome')
+
             tel=tel_value.get()
+
             idade=idade_value.get()
+            confirmar_idade=validar.validar_idade(idade)
+            if confirmar_idade != True:
+                campos_nulos.append('idade')
+
             email=email_value.get()
-            genero=genero_value.get()
+            try:
+                genero=genero_value.get(genero)
+                print(genero)
+                confirmar_genero=validar.validar_genero(genero)
+                if confirmar_genero != True:
+                    genero = 'idefinido'
+            except UnboundLocalError:
+                genero = 'idefinido'
+
             cep=cep_value.get()
+
             rua=rua_value.get()
+            confirmar_rua=validar.validar_rua(rua)
+            if confirmar_rua != True:
+                campos_nulos.append('rua')
+            
             numero=numero_value.get()
+            confirmar_numero=validar.validar_numero(numero)
+            if confirmar_numero != True:
+                campos_nulos.append('numero')
+
             complemento=complemento_value.get()
             bairro=bairro_value.get()
             cidade=cidade_value.get()
             uf=uf_value.get()
-            print(nome)
-            campos_obrigatorios = [nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf]
-            campos_vazios = [ campo for campo in campos_obrigatorios if campo == None]
-            print("aqui")
-            if campos_vazios:
-                campos_nulos = ', '.join(campos_vazios)
+            if len(campos_nulos) ==0:
+
                 print(campos_nulos)
-                print(f'Os campos {campos_nulos} não foram preenchidos')
-                messagebox.showinfo(title="erro", message=f'Os campos {campos_nulos} não foram preenchidos')
+                    #metodos para gravar e mostras as informações
+                def mostrar_info(pessoa):
+                    resposta=bd.criar_tabela_gestao(pessoa)
+                    messagebox.showinfo(title='documento salvo',message=f'{resposta}')
+                    print(campos_nulos)
+                mostrar_info(pessoa=[nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf])
+                return
+            
+            messagebox.showinfo(title="erro", message=f'Os campos {",".join(campos_nulos)} não foram preenchidos')
             
             
-            """    #metodos para gravar e mostras as informações
-            def mostrar_info(pessoa):
-                resposta=bd.criar_tabela_gestao(pessoa)
-                messagebox.showinfo(title='documento salvo',message=f'{resposta}')
-            mostrar_info(pessoa=[nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf])
-"""
+           
 
         #função para limpa os resultados
         def limpar():
