@@ -1,5 +1,5 @@
 
-## Documentação do Sistema de Gestão de Pessoas
+## Documentação do Sistema de Gestão de Pessoas .
 
 ### Introdução
 
