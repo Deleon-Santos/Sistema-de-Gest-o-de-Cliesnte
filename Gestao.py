@@ -39,59 +39,42 @@ class Janela(ctk.CTk):
     #frame onde vai rodar o sistema vais receber todos os entrys e labels e botões 
     def frame_master(self):
         def salvar():
-            campos_nulos=[]   
+             
 
             nome = nome_value.get() 
-            confirmar_nome=validar.validar_nome(nome)
-            if confirmar_nome != True:
-                campos_nulos.append('Nome')
-
+            
             tel=tel_value.get()
 
             idade=idade_value.get()
-            confirmar_idade=validar.validar_idade(idade)
-            if confirmar_idade != True:
-                campos_nulos.append('idade')
-
+            
             email=email_value.get()
-            try:
-                genero=genero_value.get(genero)
-                print(genero)
-                confirmar_genero=validar.validar_genero(genero)
-                if confirmar_genero != True:
-                    genero = 'idefinido'
-            except UnboundLocalError:
-                genero = 'idefinido'
+            
+            genero=entry_genero.get()
+                
 
             cep=cep_value.get()
 
             rua=rua_value.get()
-            confirmar_rua=validar.validar_rua(rua)
-            if confirmar_rua != True:
-                campos_nulos.append('rua')
             
             numero=numero_value.get()
-            confirmar_numero=validar.validar_numero(numero)
-            if confirmar_numero != True:
-                campos_nulos.append('numero')
-
+            
             complemento=complemento_value.get()
             bairro=bairro_value.get()
             cidade=cidade_value.get()
             uf=uf_value.get()
-            if len(campos_nulos) ==0:
-
-                print(campos_nulos)
-                    #metodos para gravar e mostras as informações
-                def mostrar_info(pessoa):
-                    resposta=bd.criar_tabela_gestao(pessoa)
-                    messagebox.showinfo(title='documento salvo',message=f'{resposta}')
-                    print(campos_nulos)
-                mostrar_info(pessoa=[nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf])
+            informacao_validada = validar.validacao(nome,idade,tel,genero,rua,numero,cep,email,bairro,cidade,uf)
+            if informacao_validada != True:
+                messagebox.showinfo(title="erro", message=f'{informacao_validada} não foram preenchidos')
                 return
+            def mostrar_info(pessoa):
+                resposta=bd.criar_tabela_gestao(pessoa)
+                messagebox.showinfo(title='documento salvo',message=f'{resposta}')
+                
+            mostrar_info(pessoa=[nome,tel,idade,email,genero,cep,rua,numero,complemento,bairro,cidade,uf])
+            return
             
-            messagebox.showinfo(title="erro", message=f'Os campos {",".join(campos_nulos)} não foram preenchidos')
-            
+        
+                
             
            
 
@@ -115,7 +98,7 @@ class Janela(ctk.CTk):
         tel_value = StringVar(value='11912345678')
         idade_value = StringVar(value='25')
         email_value = StringVar(value='dsdh@gmm.com.br')
-        genero_value = StringVar()
+        genero_value = StringVar(value='Masculino')
         rua_value = StringVar(value='Mario Veloso Serqueira')
         bairro_value = StringVar(value='Carlos Drummord Andrade')
         cidade_value = StringVar(value='Caracas')
@@ -136,7 +119,8 @@ class Janela(ctk.CTk):
         label_idade = ctk.CTkLabel(self,text='Idade', text_color=['#000','#fff'],font=('ariel',15)).place(x=550, y=220)
         entry_idade = ctk.CTkEntry(self,textvariable=idade_value, font=('ariel',20),width=50).place(x=550,y=250)
         label_genero = ctk.CTkLabel(self,text='Genero', text_color=['#000','#fff'],font=('ariel',15)).place(x=620, y=220)
-        entry_genero = ctk.CTkComboBox(self,values=['Masculino','Feminino'], width=120, text_color=['#000','#fff'],font=('ariel',15)).place(x=620, y=250)
+        entry_genero = ctk.CTkComboBox(self, values=['Masculino', 'Feminino'], width=120, text_color=['#000', '#fff'], font=('ariel', 15))
+        entry_genero.place(x=620, y=250)
         label_rua = ctk.CTkLabel(self,text='Rua', text_color=['#000','#fff'],font=('ariel',15)).place(x=90, y=290)
         label_numero = ctk.CTkLabel(self,text='N°', text_color=['#000','#fff'],font=('ariel',15)).place(x=610, y=290)
         label_complemento = ctk.CTkLabel(self,text='Compl', text_color=['#000','#fff'],font=('ariel',15)).place(x=690, y=290)
@@ -151,8 +135,7 @@ class Janela(ctk.CTk):
         entry_bairro = ctk.CTkEntry(self,textvariable=bairro_value, font=('ariel',20),width=230).place(x=250,y=390)
         entry_cidade = ctk.CTkEntry(self,  textvariable=cidade_value,font=('ariel',20),width=180).place(x=500,y=390)
         entry_uf = ctk.CTkEntry(self,  textvariable=uf_value,font=('ariel',20),width=40).place(x=700,y=390)
-        label_obs = ctk.CTkLabel(self,text='Observação', text_color=['#000','#fff'],font=('ariel',15)).place(x=90, y=430)
-        entry_obs = ctk.CTkTextbox(self,  font=('ariel',20),width=650, height=60, fg_color='transparent',border_color='#aaa',border_width=1).place(x=90,y=460)
+        
         btn_salvar = ctk.CTkButton(self,text='Salvar'.upper(),command=salvar,text_color=['#000','#fff'],font=('ariel',15),hover_color='teal').place(x=350,y=560)
         btn_salvar = ctk.CTkButton(self,text='Limpar'.upper(),command=limpar,text_color=['#000','#fff'],font=('ariel',15),hover_color='teal').place(x=600,y=560)
         #função para pegar os valores
